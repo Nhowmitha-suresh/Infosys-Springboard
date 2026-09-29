@@ -1,3 +1,4 @@
+```javascript
 require("dotenv").config({
   path: require("path").resolve(__dirname, "../.env")
 });
@@ -15,7 +16,6 @@ const {
   startWearableSimulator
 } = require("./services/wearableSimulator");
 
-
 // =========================================================
 // MILESTONE 3 - KAFKA STREAMS ANOMALY DETECTION
 // =========================================================
@@ -23,7 +23,6 @@ const {
 const {
   startKafkaAnomalyDetector
 } = require("./services/kafkaAnomalyDetector");
-
 
 // =========================================================
 // EXISTING ROUTES
@@ -41,13 +40,11 @@ const employeeRoutes = require("./routes/employees");
 const cvdRoutes = require("./routes/cvd");
 const diabetesRoutes = require("./routes/diabetes");
 
-
 // =========================================================
 // MILESTONE 3 - REAL-TIME ALERT ENGINE
 // =========================================================
 
 const alertRoutes = require("./routes/alerts.cjs");
-
 
 // =========================================================
 // MILESTONE 4 - CAREPLAN & INTERVENTION
@@ -62,16 +59,13 @@ const guidelineRoutes = require("./routes/guidelines");
 // Module 3 - Adherence Tracking
 const adherenceRoutes = require("./routes/adherence");
 
-
 const app = express();
-
 
 // =========================================================
 // DATABASE
 // =========================================================
 
 connectDB();
-
 
 // =========================================================
 // MIDDLEWARE
@@ -91,7 +85,6 @@ app.use("/api/employees", requireMongo);
 app.use("/api/careplans", requireMongo);
 app.use("/api/guidelines", requireMongo);
 app.use("/api/adherence", requireMongo);
-
 
 // =========================================================
 // EXISTING API ROUTES
@@ -152,7 +145,6 @@ app.use(
   diabetesRoutes
 );
 
-
 // =========================================================
 // MILESTONE 3 - REAL-TIME ALERT ENGINE
 // =========================================================
@@ -161,7 +153,6 @@ app.use(
   "/api/alerts",
   alertRoutes
 );
-
 
 // =========================================================
 // MILESTONE 4 - CAREPLAN & INTERVENTION
@@ -185,19 +176,24 @@ app.use(
   adherenceRoutes
 );
 
-
 // =========================================================
 // ROOT ROUTE
 // =========================================================
 
 app.get("/", (req, res) => {
-  res.json({ success: true, message: "MediSphere Hospital Management API Running" });
+  res.json({
+    success: true,
+    message: "MediSphere Hospital Management API Running"
+  });
 });
 
 app.get("/api/health", async (req, res) => {
-  res.json({ success: true, backend: "online", mongodb: require('mongoose').connection.readyState === 1 });
+  res.json({
+    success: true,
+    backend: "online",
+    mongodb: require("mongoose").connection.readyState === 1
+  });
 });
-
 
 // =========================================================
 // START SERVER
@@ -211,23 +207,29 @@ app.listen(PORT, () => {
     `Server running on port ${PORT}`
   );
 
-
   // =======================================================
   // MILESTONE 3 SERVICES
   // =======================================================
 
-  // Start wearable device simulator
-  startWearableSimulator();
+  if (process.env.KAFKA_ENABLED === "true") {
 
+    // Start wearable device simulator
+    startWearableSimulator();
 
-  // Start Kafka Streams anomaly detector
-  startKafkaAnomalyDetector();
+    // Start Kafka Streams anomaly detector
+    startKafkaAnomalyDetector();
 
+    console.log(
+      "Milestone 3 monitoring services started."
+    );
 
-  console.log(
-    "Milestone 3 monitoring services started."
-  );
+  } else {
 
+    console.log(
+      "Kafka services disabled."
+    );
+
+  }
 
   // =======================================================
   // MILESTONE 4 SERVICES
@@ -250,3 +252,4 @@ app.listen(PORT, () => {
   );
 
 });
+```
