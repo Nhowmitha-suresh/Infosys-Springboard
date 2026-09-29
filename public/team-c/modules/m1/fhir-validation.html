@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FHIR Validation | MediSphere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="app-logo">
+            <div class="app-logo-icon"><i class="bi bi-shield-fill-check"></i></div>
+            <div class="app-logo-text">
+                <h5>MediSphere</h5>
+                <small>Healthcare Management</small>
+            </div>
+        </div>
+        <nav class="app-nav">
+            <a href="index.html" class="app-nav-link"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+            <a href="fhir-validation.html" class="app-nav-link active"><i class="bi bi-code-slash"></i> FHIR Validation</a>
+            <a href="patient-consent.html" class="app-nav-link"><i class="bi bi-person-check-fill"></i> Patient Consent</a>
+            <a href="audit-logs.html" class="app-nav-link"><i class="bi bi-shield-check"></i> HIPAA Audit Logs</a>
+            <div class="app-nav-divider"></div>
+            <a href="settings.html" class="app-nav-link"><i class="bi bi-gear-fill"></i> Settings</a>
+            <a href="profile.html" class="app-nav-link"><i class="bi bi-person-circle"></i> Profile</a>
+            <a href="index.html" class="app-nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </nav>
+    </aside>
+    <div class="app-overlay" id="appOverlay"></div>
+    <div class="app-main">
+        <header class="app-topbar">
+            <div style="display:flex; align-items:center; gap:14px;">
+                <button class="app-hamburger" id="appHamburger" aria-label="Toggle menu"><i class="bi bi-list"></i></button>
+                <div class="app-breadcrumb"><span>Dashboard</span> <i class="bi bi-chevron-right" style="font-size:10px;"></i> <span class="current">FHIR Validation</span></div>
+            </div>
+            <div class="app-topbar-right">
+                <div class="app-bell-wrap">
+                    <button class="app-bell-btn" id="appBellBtn" aria-label="Notifications">
+                        <i class="bi bi-bell"></i>
+                        <span class="app-bell-badge">3</span>
+                    </button>
+                    <div class="app-bell-dropdown" id="appBellDropdown">
+                        <div class="app-bell-header">Notifications</div>
+                    <div class="app-bell-item app-bell-critical">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>Patient #P1005 &mdash; FHIR Validation Failed</strong>
+                            <small>Invalid birthDate format detected.</small>
+                            <small style="color:#5b6479;">2 min ago</small>
+                        </span>
+                    </div>
+                    <div class="app-bell-item app-bell-warning">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>Patient #P1002 &mdash; Consent Pending</strong>
+                            <small>Awaiting patient confirmation for data sharing.</small>
+                            <small style="color:#5b6479;">15 min ago</small>
+                        </span>
+                    </div>
+                    <div class="app-bell-item app-bell-info">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>System &mdash; Audit log generated</strong>
+                            <small>New audit entry recorded by Admin.</small>
+                            <small style="color:#5b6479;">30 min ago</small>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+                <div class="app-profile">
+                    <button class="app-profile-btn" id="appProfileBtn">
+                        <div class="app-avatar">C</div>
+                        <span>
+                            <span class="app-profile-name">Clinician</span>
+                            <span class="app-profile-status">Online</span>
+                        </span>
+                        <i class="bi bi-chevron-down" style="font-size:11px; color:#8b94a7;"></i>
+                    </button>
+                    <div class="app-profile-dropdown" id="appProfileDropdown">
+                        <a href="profile.html"><i class="bi bi-person"></i> Profile</a>
+                        <a href="settings.html"><i class="bi bi-gear"></i> Settings</a>
+                        <a href="index.html"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="app-content">
+            <div class="panel-card">
+                <div class="panel-card-title">Enter Patient Resource Details</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Patient ID</label>
+                        <input type="text" id="formPatientId" class="form-control" placeholder="e.g. P101">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Resource Type</label>
+                        <select id="formResourceType" class="form-select">
+                            <option value="Patient" selected>Patient</option>
+                            <option value="Observation">Observation</option>
+                            <option value="Consent">Consent</option>
+                            <option value="Encounter">Encounter</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Gender</label>
+                        <select id="formGender" class="form-select">
+                            <option value="" selected disabled>Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Birth Date</label>
+                        <input type="date" id="formBirthDate" class="form-control">
+                    </div>
+                </div>
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="formActiveToggle" checked>
+                    <label class="form-check-label small" for="formActiveToggle">Patient record is active</label>
+                </div>
+                <div class="mt-3">
+                    <button id="validateFormBtn" class="btn btn-primary px-4"><i class="bi bi-check2-circle"></i> Validate Resource</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-card-title">Or Upload a FHIR JSON File Instead</div>
+                <div class="upload-dropzone">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                    <p>Drag &amp; drop your file here or</p>
+                    <label class="btn btn-primary btn-sm px-3">
+                        Choose File
+                        <input type="file" class="upload-file-input d-none" data-label-target="#chosenFileLabel" accept=".json">
+                    </label>
+                    <span id="chosenFileLabel" class="ms-2 text-muted small">No file chosen</span>
+                    <div class="mt-3">
+                        <button id="validateBtn" class="btn btn-primary px-4"><i class="bi bi-check2-circle"></i> Validate Resource</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-grid" style="grid-template-columns: repeat(3, minmax(0,1fr));">
+                <div class="stat-card-v2">
+                    <div class="stat-card-v2-info">
+                        <p class="label">Total Records</p>
+                        <h3>1,245</h3>
+                    </div>
+                    <div class="stat-icon-v2 icon-blue-v2"><i class="bi bi-file-earmark-text-fill"></i></div>
+                </div>
+                <div class="stat-card-v2">
+                    <div class="stat-card-v2-info">
+                        <p class="label">Valid Records</p>
+                        <h3>1,180</h3>
+                        <span class="sub sub-green">94.8%</span>
+                    </div>
+                    <div class="stat-icon-v2 icon-green-v2"><i class="bi bi-check-lg"></i></div>
+                </div>
+                <div class="stat-card-v2">
+                    <div class="stat-card-v2-info">
+                        <p class="label">Invalid Records</p>
+                        <h3>65</h3>
+                        <span class="sub sub-red">5.2%</span>
+                    </div>
+                    <div class="stat-icon-v2 icon-red-v2"><i class="bi bi-x-lg"></i></div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-7">
+                    <div class="panel-card h-100">
+                        <div class="panel-card-title">Validation Result</div>
+                        <table class="app-table mb-0">
+                            <tbody>
+                                <tr><td style="color:#8b94a7;">Resource Type</td><td id="resultResourceType">-</td></tr>
+                                <tr><td style="color:#8b94a7;">Status</td><td id="resultStatus">-</td></tr>
+                                <tr><td style="color:#8b94a7;">Checked On</td><td id="resultCheckedOn">-</td></tr>
+                                <tr><td style="color:#8b94a7;">Standard</td><td>FHIR R4</td></tr>
+                                <tr><td style="color:#8b94a7;">Message</td><td id="resultMessage">-</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="panel-card-title mt-4">Validation Errors</div>
+                        <div class="app-table-wrap">
+                            <table class="app-table">
+                                <thead><tr><th>Field</th><th>Issue</th><th>Severity</th></tr></thead>
+                                <tbody id="validationErrorsBody">
+                                    <tr><td colspan="3" class="text-muted">No validation performed yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="panel-card h-100">
+                        <div class="panel-card-title">Validation Status</div>
+                        <div class="donut-wrap mb-4">
+                            <div class="donut-canvas-box">
+                                <canvas id="fhirDonut"></canvas>
+                                <div class="donut-center-label"><strong>1,245</strong><span>Total</span></div>
+                            </div>
+                            <div class="donut-legend">
+                                <div class="donut-legend-item"><span class="donut-legend-dot" style="background:#4ade80;"></span> Valid Records (94.8%)</div>
+                                <div class="donut-legend-item"><span class="donut-legend-dot" style="background:#ef4444;"></span> Invalid Records (5.2%)</div>
+                            </div>
+                        </div>
+
+                        <div class="panel-card-title">Recent Validations <a href="#">View All</a></div>
+                        <div class="app-table-wrap">
+                            <table class="app-table">
+                                <thead><tr><th>Resource ID</th><th>Status</th><th>Checked On</th></tr></thead>
+                                <tbody>
+                                    <tr><td>P1001</td><td><span class="pill pill-green">Valid</span></td><td>27/07/2026 11:45 AM</td></tr>
+                                    <tr><td>P1002</td><td><span class="pill pill-green">Valid</span></td><td>27/07/2026 11:30 AM</td></tr>
+                                    <tr><td>P1005</td><td><span class="pill pill-red">Invalid</span></td><td>27/07/2026 10:50 AM</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="app-footer">
+            <h6>MediSphere Healthcare Management Platform</h6>
+            <p>&copy; 2026 MediSphere | Secure &bull; Reliable &bull; Healthcare</p>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="api-config.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+<script src="../_iframe-fix.js"></script>
+</body>
+</html>

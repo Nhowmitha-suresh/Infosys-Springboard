@@ -1,0 +1,38 @@
+{
+  "version": "2.1",
+  "algorithm": "Logistic Regression",
+  "trained_at": "2026-08-15T18:43:13.206061",
+  "accuracy": 0.8175,
+  "baseRate": 0.1935,
+  "intercept": -1.734875,
+  "coefficients": {
+    "age": 0.584396,
+    "gender": 0.16122,
+    "systolicBp": 0.527678,
+    "diastolicBp": 0.114406,
+    "cholesterol": 0.476271,
+    "heartRate": 0.113014,
+    "bmi": 0.345111,
+    "diabetes": 0.297635
+  },
+  "means": {
+    "age": 54.0,
+    "gender": 0.52,
+    "systolicBp": 128.0,
+    "diastolicBp": 81.0,
+    "cholesterol": 210.0,
+    "heartRate": 74.0,
+    "bmi": 26.5,
+    "diabetes": 0.15
+  },
+  "stds": {
+    "age": 12.0,
+    "gender": 0.5,
+    "systolicBp": 17.0,
+    "diastolicBp": 10.0,
+    "cholesterol": 40.0,
+    "heartRate": 12.0,
+    "bmi": 5.2,
+    "diabetes": 0.35
+  }
+}

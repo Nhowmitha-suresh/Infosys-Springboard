@@ -1,0 +1,23 @@
+{
+  "name": "medisphere-monitoring-service",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Milestone 3: Clinical Rule Engine + Mobile Notifications microservice for the Medisphere Healthcare Platform",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:setup": "node scripts/setupDb.js",
+    "db:seed": "node scripts/seedRules.js",
+    "simulate": "node scripts/simulateVitals.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.12.0",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {}
+}

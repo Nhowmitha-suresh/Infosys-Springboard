@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | MediSphere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="app-logo">
+            <div class="app-logo-icon"><i class="bi bi-shield-fill-check"></i></div>
+            <div class="app-logo-text">
+                <h5>MediSphere</h5>
+                <small>Healthcare Management</small>
+            </div>
+        </div>
+        <nav class="app-nav">
+            <a href="index.html" class="app-nav-link active"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+            <a href="fhir-validation.html" class="app-nav-link"><i class="bi bi-code-slash"></i> FHIR Validation</a>
+            <a href="patient-consent.html" class="app-nav-link"><i class="bi bi-person-check-fill"></i> Patient Consent</a>
+            <a href="audit-logs.html" class="app-nav-link"><i class="bi bi-shield-check"></i> HIPAA Audit Logs</a>
+            <div class="app-nav-divider"></div>
+            <a href="settings.html" class="app-nav-link"><i class="bi bi-gear-fill"></i> Settings</a>
+            <a href="profile.html" class="app-nav-link"><i class="bi bi-person-circle"></i> Profile</a>
+            <a href="index.html" class="app-nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </nav>
+    </aside>
+    <div class="app-overlay" id="appOverlay"></div>
+    <div class="app-main">
+        <header class="app-topbar">
+            <div style="display:flex; align-items:center; gap:14px;">
+                <button class="app-hamburger" id="appHamburger" aria-label="Toggle menu"><i class="bi bi-list"></i></button>
+                <div class="app-breadcrumb"><span class="current">Dashboard</span></div>
+            </div>
+            <div class="app-topbar-right">
+                <div class="app-bell-wrap">
+                    <button class="app-bell-btn" id="appBellBtn" aria-label="Notifications">
+                        <i class="bi bi-bell"></i>
+                        <span class="app-bell-badge">3</span>
+                    </button>
+                    <div class="app-bell-dropdown" id="appBellDropdown">
+                        <div class="app-bell-header">Notifications</div>
+                    <div class="app-bell-item app-bell-critical">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>Patient #P1005 &mdash; FHIR Validation Failed</strong>
+                            <small>Invalid birthDate format detected.</small>
+                            <small style="color:#5b6479;">2 min ago</small>
+                        </span>
+                    </div>
+                    <div class="app-bell-item app-bell-warning">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>Patient #P1002 &mdash; Consent Pending</strong>
+                            <small>Awaiting patient confirmation for data sharing.</small>
+                            <small style="color:#5b6479;">15 min ago</small>
+                        </span>
+                    </div>
+                    <div class="app-bell-item app-bell-info">
+                        <span class="app-bell-dot"></span>
+                        <span>
+                            <strong>System &mdash; Audit log generated</strong>
+                            <small>New audit entry recorded by Admin.</small>
+                            <small style="color:#5b6479;">30 min ago</small>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+                <div class="app-profile">
+                    <button class="app-profile-btn" id="appProfileBtn">
+                        <div class="app-avatar">C</div>
+                        <span>
+                            <span class="app-profile-name">Clinician</span>
+                            <span class="app-profile-status">Online</span>
+                        </span>
+                        <i class="bi bi-chevron-down" style="font-size:11px; color:#8b94a7;"></i>
+                    </button>
+                    <div class="app-profile-dropdown" id="appProfileDropdown">
+                        <a href="profile.html"><i class="bi bi-person"></i> Profile</a>
+                        <a href="settings.html"><i class="bi bi-gear"></i> Settings</a>
+                        <a href="index.html"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="app-content">
+            <section class="py-2">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6">
+                        <span class="pill pill-blue">Healthcare Compliance &amp; Security</span>
+                        <h1 class="fw-bold mt-4" style="font-size:2.4rem; color:#fff;">Ensuring Compliance.</h1>
+                        <h1 class="fw-bold" style="font-size:2.4rem; color:#3b82f6;">Protecting Patients.</h1>
+                        <p class="mt-4" style="color:#9aa4b8; font-size:15.5px;">
+                            MediSphere helps hospitals manage patient data securely,
+                            validate FHIR resources, monitor HIPAA compliance,
+                            and verify patient consent through a modern dashboard.
+                        </p>
+                        <div class="mt-4">
+                            <a href="fhir-validation.html" class="btn btn-primary btn-lg me-3">Go To FHIR Validation</a>
+                            <a href="audit-logs.html" class="btn btn-lg" style="border:1px solid #263349; color:#cdd4e0;">View Reports</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 text-center position-relative">
+                        <div class="panel-card mb-0" style="position:absolute; top:10px; left:0; padding:14px 18px; z-index:2; width:auto;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="stat-icon-v2 icon-blue-v2" style="width:34px; height:34px; font-size:14px;"><i class="bi bi-shield-check"></i></div>
+                                <div>
+                                    <h6 class="text-white mb-0" style="font-size:13px;">FHIR</h6>
+                                    <small class="text-muted" style="font-size:11px;">Valid Resources</small>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/shield.png" class="img-fluid" style="max-width:340px; filter:drop-shadow(0 25px 60px rgba(59,130,246,.35));">
+                        <div class="panel-card mb-0" style="position:absolute; top:45%; right:0; padding:14px 18px; z-index:2; width:auto;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="stat-icon-v2 icon-green-v2" style="width:34px; height:34px; font-size:14px;"><i class="bi bi-lock-fill"></i></div>
+                                <div>
+                                    <h6 class="text-white mb-0" style="font-size:13px;">HIPAA</h6>
+                                    <small class="text-muted" style="font-size:11px;">Audit Protected</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-card mb-0" style="position:absolute; bottom:10px; left:10px; padding:14px 18px; z-index:2; width:auto;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="stat-icon-v2 icon-purple-v2" style="width:34px; height:34px; font-size:14px;"><i class="bi bi-person-check-fill"></i></div>
+                                <div>
+                                    <h6 class="text-white mb-0" style="font-size:13px;">Consent</h6>
+                                    <small class="text-muted" style="font-size:11px;">Patient Authorized</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-5 text-center">
+                <h2 class="fw-bold text-white">Core Healthcare Features</h2>
+                <p class="text-muted">Secure, Fast and Reliable Healthcare Management</p>
+            </section>
+
+            <section class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="panel-card h-100 text-start">
+                        <div class="stat-icon-v2 icon-blue-v2 mb-3"><i class="bi bi-code-slash"></i></div>
+                        <h5 class="text-white">FHIR Resource Validation</h5>
+                        <p class="text-muted small">Validate patient records according to FHIR healthcare standards before saving.</p>
+                        <a href="fhir-validation.html" style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel-card h-100 text-start">
+                        <div class="stat-icon-v2 icon-green-v2 mb-3"><i class="bi bi-shield-check"></i></div>
+                        <h5 class="text-white">HIPAA Audit Logging</h5>
+                        <p class="text-muted small">Monitor every healthcare activity securely and maintain complete audit history.</p>
+                        <a href="audit-logs.html" style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel-card h-100 text-start">
+                        <div class="stat-icon-v2 icon-orange-v2 mb-3"><i class="bi bi-person-fill"></i></div>
+                        <h5 class="text-white">Patient Consent Verification</h5>
+                        <p class="text-muted small">Verify and manage patient consent digitally with complete transparency.</p>
+                        <a href="patient-consent.html" style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-3">
+                <div class="text-center mb-4">
+                    <p class="text-muted">Every module of the MediSphere platform</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m2/model-accuracy.html','../m2/model-accuracy.html','Model Accuracy')">
+                            <div class="stat-icon-v2 icon-purple-v2 mb-3"><i class="bi bi-bullseye"></i></div>
+                            <h5 class="text-white">Model Accuracy</h5>
+                            <p class="text-muted small">Track AI prediction model accuracy across patient datasets.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m2/federated-convergence.html','../m2/federated-convergence.html','Federated Convergence')">
+                            <div class="stat-icon-v2 icon-purple-v2 mb-3"><i class="bi bi-diagram-3-fill"></i></div>
+                            <h5 class="text-white">Federated Convergence</h5>
+                            <p class="text-muted small">Monitor federated learning round convergence across sites.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m2/shap-validity.html','../m2/shap-validity.html','SHAP Validity')">
+                            <div class="stat-icon-v2 icon-purple-v2 mb-3"><i class="bi bi-search"></i></div>
+                            <h5 class="text-white">SHAP Validity</h5>
+                            <p class="text-muted small">Validate SHAP explanation quality for AI predictions.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m3/vitals-range-validation.html','../m3/vitals-range-validation.html','Vitals Range Validation')">
+                            <div class="stat-icon-v2 icon-orange-v2 mb-3"><i class="bi bi-heart-pulse-fill"></i></div>
+                            <h5 class="text-white">Vitals Range Validation</h5>
+                            <p class="text-muted small">Validate patient vitals fall within safe clinical ranges.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m3/alert-fatigue-prevention.html','../m3/alert-fatigue-prevention.html','Alert Fatigue Prevention')">
+                            <div class="stat-icon-v2 icon-orange-v2 mb-3"><i class="bi bi-bell-slash-fill"></i></div>
+                            <h5 class="text-white">Alert Fatigue Prevention</h5>
+                            <p class="text-muted small">Reduce non-critical alert noise for clinical staff.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m3/anomaly-detection-precision.html','../m3/anomaly-detection-precision.html','Anomaly Detection Precision')">
+                            <div class="stat-icon-v2 icon-orange-v2 mb-3"><i class="bi bi-radar"></i></div>
+                            <h5 class="text-white">Anomaly Detection Precision</h5>
+                            <p class="text-muted small">Measure precision of anomaly detection above 85% target.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m4/clinical-guideline-compliance.html','../m4/clinical-guideline-compliance.html','Clinical Guideline Compliance')">
+                            <div class="stat-icon-v2 icon-green-v2 mb-3"><i class="bi bi-journal-check"></i></div>
+                            <h5 class="text-white">Clinical Guideline Compliance</h5>
+                            <p class="text-muted small">Check care plans against clinical guidelines.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m4/careplan-safety-checks.html','../m4/careplan-safety-checks.html','Careplan Safety Checks')">
+                            <div class="stat-icon-v2 icon-green-v2 mb-3"><i class="bi bi-clipboard2-pulse-fill"></i></div>
+                            <h5 class="text-white">Careplan Safety Checks</h5>
+                            <p class="text-muted small">Automated safety checks for patient care plans.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel-card h-100 text-start" style="cursor:pointer" onclick="goModule('modules/m4/drug-interaction-validation.html','../m4/drug-interaction-validation.html','Drug Interaction Validation')">
+                            <div class="stat-icon-v2 icon-green-v2 mb-3"><i class="bi bi-capsule"></i></div>
+                            <h5 class="text-white">Drug Interaction Validation</h5>
+                            <p class="text-muted small">Detect dangerous drug-to-drug interactions before prescribing.</p>
+                            <span style="color:#3b82f6; font-size:13.5px; font-weight:600;">Learn more <i class="bi bi-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="panel-card mb-0">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="stat-icon-v2 icon-blue-v2" style="width:32px; height:32px; font-size:14px;"><i class="bi bi-bar-chart-fill"></i></span>
+                        <h5 class="fw-bold mb-0 text-white">System Overview</h5>
+                    </div>
+                    <select class="form-select form-select-sm w-auto">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
+
+                <div class="row g-4 text-center text-md-start">
+                    <div class="col-md col-6">
+                        <div class="stat-icon-v2 icon-blue-v2 mb-2"><i class="bi bi-file-earmark-text-fill"></i></div>
+                        <h3 class="fw-bold text-white mb-0">1,248</h3>
+                        <p class="text-muted small mb-1">FHIR Validations</p>
+                        <span class="sub sub-green"><i class="bi bi-arrow-up"></i> 12.5% from last month</span>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="stat-icon-v2 icon-green-v2 mb-2"><i class="bi bi-check-circle-fill"></i></div>
+                        <h3 class="fw-bold text-white mb-0">1,187</h3>
+                        <p class="text-muted small mb-1">Valid Resources</p>
+                        <span class="sub sub-green"><i class="bi bi-arrow-up"></i> 10.3% from last month</span>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="stat-icon-v2 icon-orange-v2 mb-2"><i class="bi bi-people-fill"></i></div>
+                        <h3 class="fw-bold text-white mb-0">532</h3>
+                        <p class="text-muted small mb-1">Active Consents</p>
+                        <span class="sub sub-green"><i class="bi bi-arrow-up"></i> 8.2% from last month</span>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="stat-icon-v2 icon-purple-v2 mb-2"><i class="bi bi-clipboard-check-fill"></i></div>
+                        <h3 class="fw-bold text-white mb-0">2,756</h3>
+                        <p class="text-muted small mb-1">Audit Events</p>
+                        <span class="sub sub-green"><i class="bi bi-arrow-up"></i> 15.7% from last month</span>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="stat-icon-v2 icon-blue-v2 mb-2"><i class="bi bi-shield-fill-check"></i></div>
+                        <h3 class="fw-bold text-white mb-0">94.2%</h3>
+                        <p class="text-muted small mb-1">Compliance Score</p>
+                        <span class="sub sub-green"><i class="bi bi-arrow-up"></i> 5.4% from last month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="app-footer">
+            <h6>MediSphere Healthcare Management Platform</h6>
+            <p>&copy; 2026 MediSphere | Secure &bull; Reliable &bull; Healthcare</p>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+function goModule(shellSrc, standaloneSrc, title){
+  try{
+    if(window.parent && window.parent !== window && window.parent.jumpTo){
+      window.parent.jumpTo(shellSrc, title);
+      return;
+    }
+  }catch(e){}
+  window.location.href = standaloneSrc;
+}
+</script>
+<script src="app.js"></script>
+
+<script src="../_iframe-fix.js"></script>
+</body>
+</html>

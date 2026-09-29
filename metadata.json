@@ -1,0 +1,6 @@
+{
+  "name": "HealthCare Management System",
+  "description": "Enterprise-Level Hospital Management System with FHIR Integration, Patient Digital Twin, Kafka Streaming, and Role-Based Access Control.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

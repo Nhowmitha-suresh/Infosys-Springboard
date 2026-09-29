@@ -1,0 +1,398 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* =====================================================================
+   MediSphere design system — dark navy / blue
+   Matches the approved UI reference screenshots: dark navy app shell,
+   blue gradient page headers, dark cards with hairline borders, light text.
+   Display  : Space Grotesk  — brand wordmark, page titles, signature
+   Body/UI  : Inter          — everything you read
+   Data     : IBM Plex Mono  — numbers, stats, IDs, timestamps
+   ===================================================================== */
+:root {
+  /* --- text --- */
+  --ink: #eef2f8;              /* primary text on dark surfaces */
+  --ink-soft: #8b97ab;         /* muted / secondary text */
+
+  /* --- palette --- */
+  --teal-950: #0a0f1c;   /* darkest — sidebar / page background */
+  --teal-900: #0d1424;   /* page background */
+  --teal-800: #17335c;   /* dark blue — hover states */
+  --teal-600: #2f6fed;   /* primary blue — buttons, links, topbar */
+  --teal-500: #4c86f5;   /* lighter blue — active nav, focus rings, accents */
+  --mint-100: #eaf1fd;
+  --mint-050: #f4f8fe;
+
+  --paper: #0b1120;      /* app background */
+  --surface: #111a2e;    /* card / panel background */
+  --surface-raised: #16213a; /* inputs, hover surfaces */
+  --line: rgba(255, 255, 255, 0.08);   /* hairline borders */
+  --line-soft: rgba(255, 255, 255, 0.05);
+  /* --- end palette --- */
+
+  --coral: #ef4444;
+  --coral-100: rgba(239, 68, 68, 0.14);
+  --amber: #f5a524;
+  --amber-100: rgba(245, 165, 36, 0.14);
+  --green: #12b76a;
+  --green-100: rgba(18, 183, 106, 0.14);
+  --radius: 12px;
+
+  --bs-primary: var(--teal-600);
+  --bs-body-bg: var(--paper);
+  --bs-body-color: var(--ink);
+  --bs-border-color: var(--line);
+  --bs-body-font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  background: var(--paper);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+}
+
+h1, h2, h3, h4, h5, .brand-font {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.font-mono, .ms-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Buttons / links use the new blue, never Bootstrap's default blue */
+.btn-primary {
+  background-color: var(--teal-600);
+  border-color: var(--teal-600);
+  font-weight: 500;
+  color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--teal-500);
+  border-color: var(--teal-500);
+}
+.btn-outline-primary {
+  color: var(--teal-500);
+  border-color: var(--teal-600);
+}
+.btn-outline-primary:hover {
+  background-color: var(--teal-600);
+  border-color: var(--teal-600);
+  color: #fff;
+}
+.btn-outline-danger {
+  color: var(--coral);
+  border-color: var(--coral);
+}
+.btn-outline-danger:hover {
+  background-color: var(--coral);
+  border-color: var(--coral);
+}
+.btn-light {
+  background-color: var(--surface-raised);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-light:hover, .btn-light:focus {
+  background-color: var(--surface-raised);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn, .form-control, .form-select {
+  border-radius: 9px;
+}
+.text-primary { color: var(--teal-500) !important; }
+.text-muted { color: var(--ink-soft) !important; }
+.text-danger { color: var(--coral) !important; }
+a { color: var(--teal-500); text-decoration-thickness: 1px; }
+a:hover { color: var(--teal-500); }
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.form-control, .form-select {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.form-control::placeholder { color: var(--ink-soft); opacity: 1; }
+.form-control:focus, .form-select:focus {
+  background-color: var(--surface-raised);
+  color: var(--ink);
+  border-color: var(--teal-500);
+  box-shadow: 0 0 0 0.2rem rgba(47, 111, 237, 0.2);
+}
+.form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%238b97ab' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+.input-group-text {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.form-check-input {
+  background-color: var(--surface-raised);
+  border-color: var(--line);
+}
+.form-check-input:checked {
+  background-color: var(--teal-600);
+  border-color: var(--teal-600);
+}
+hr, .dropdown-divider { border-color: var(--line); }
+
+/* ---------------------------------------------------------------------
+   App shell
+--------------------------------------------------------------------- */
+.ms-app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.ms-sidebar {
+  width: 258px;
+  flex-shrink: 0;
+  background: linear-gradient(185deg, var(--teal-950), #0a0f1c 78%);
+  color: #fff;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.ms-sidebar .brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+.ms-sidebar .nav-section-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(255,255,255,0.4);
+  padding: 0 0.6rem;
+  margin: 1.1rem 0 0.5rem;
+}
+.ms-sidebar .nav-link {
+  color: rgba(255,255,255,0.72);
+  border-radius: 9px;
+  padding: 0.55rem 0.8rem;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
+  font-weight: 450;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.ms-sidebar .nav-link i {
+  font-size: 0.95rem;
+  width: 18px;
+  text-align: center;
+  opacity: 0.85;
+}
+.ms-sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+}
+.ms-sidebar .nav-link.active {
+  background: var(--teal-500);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+}
+
+/* hairline pulse-line etched at the base of the sidebar */
+.ms-sidebar-pulse {
+  margin-top: auto;
+  padding: 1rem 1.1rem 1.3rem;
+  opacity: 0.55;
+}
+.ms-sidebar-pulse svg { width: 100%; height: 22px; display: block; }
+.ms-sidebar-pulse .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em;
+  margin-top: 0.4rem;
+}
+
+.ms-main { flex: 1; min-width: 0; background: var(--paper); min-height: 100vh; }
+
+.ms-topbar {
+  background: linear-gradient(90deg, #2f6fed, #4c86f5);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  position: relative;
+}
+.ms-topbar h4 { color: #fff; }
+.ms-topbar .ms-topbar-role { color: rgba(255,255,255,0.85); }
+.ms-topbar .ms-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  background: rgba(10, 15, 28, 0.35);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* ---------------------------------------------------------------------
+   Cards & the signature "vitals readout" stat tile
+--------------------------------------------------------------------- */
+.ms-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.ms-stat-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--tint, var(--teal-500));
+  background: var(--surface);
+  padding: 1.05rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.ms-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.ms-stat-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.ms-stat-label {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Status badges
+--------------------------------------------------------------------- */
+.ms-badge-status {
+  font-weight: 500;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--ink-soft);
+}
+.ms-badge-status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ---------------------------------------------------------------------
+   Tables
+--------------------------------------------------------------------- */
+.table { color: var(--ink); }
+.table > :not(caption) > * > * {
+  background-color: transparent;
+  color: var(--ink);
+  border-bottom-color: var(--line);
+  box-shadow: none;
+}
+.ms-table thead th {
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  font-weight: 500;
+}
+.ms-table td { font-size: 0.92rem; border-bottom: 1px solid var(--line-soft); }
+.ms-table .ms-mono-cell {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.border-bottom { border-color: var(--line) !important; }
+
+/* ---------------------------------------------------------------------
+   Modals & dropdowns
+--------------------------------------------------------------------- */
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.modal-header, .modal-footer { border-color: var(--line); }
+.btn-close { filter: invert(1) grayscale(100%) brightness(1.4); }
+.modal-backdrop { background: #000; }
+.modal-backdrop.show { opacity: 0.65; }
+
+.dropdown-menu {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+.dropdown-item-text, .dropdown-item { color: var(--ink); }
+.dropdown-item:hover, .dropdown-item:focus { background: rgba(255,255,255,0.06); color: var(--ink); }
+.dropdown-item.text-danger:hover { background: var(--coral-100); color: var(--coral); }
+
+.alert-danger {
+  background-color: var(--coral-100);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ffb4ab;
+}
+
+/* ---------------------------------------------------------------------
+   Auth screens
+--------------------------------------------------------------------- */
+.auth-split { min-height: 100vh; background: var(--paper); }
+.auth-split .auth-form-side { background: var(--paper); color: var(--ink); }
+.auth-visual {
+  background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06), transparent 45%),
+              linear-gradient(165deg, var(--teal-950), #0a0f1c 85%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.auth-visual .pulse-line { position: absolute; left: 0; right: 0; bottom: 14%; opacity: 0.5; }
+.auth-visual .pulse-line svg { width: 130%; height: 90px; }
+
+.auth-badge-row {
+  display: flex;
+  gap: 2.25rem;
+}
+.auth-badge-row .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.auth-demo-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+@media (max-width: 900px) {
+  .ms-sidebar { position: fixed; z-index: 1040; transform: translateX(-100%); transition: transform .2s ease; }
+  .ms-sidebar.open { transform: translateX(0); }
+}
+
+/* Live "LIVE" pulse dot used on the Vitals Monitor (Patient 360 page) */
+@keyframes ms-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(47, 111, 237, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(47, 111, 237, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 111, 237, 0); }
+}

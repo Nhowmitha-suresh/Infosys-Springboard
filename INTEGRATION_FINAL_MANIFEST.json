@@ -1,0 +1,13 @@
+{
+  "package": "MediSphere-Integrated-Final",
+  "source_frontend_zip": "MediSphere-Integrated_TeamABCD (3).zip",
+  "source_database_sql": "medisphere_final_all_teams.sql",
+  "database_engine": "PostgreSQL 17",
+  "database_dump_sha256": "906a552d1fedf0106bc19d524a56e36855cdc578a2906cb132db8e3659ba6be8",
+  "merge_policy": "Existing project source preserved; database dump added verbatim; dedicated PostgreSQL compose integration added.",
+  "validation": {
+    "node_backend_syntax": "passed",
+    "monitoring_service_syntax": "passed",
+    "postgres_dump": "preserved verbatim; runtime restore requires PostgreSQL/Docker"
+  }
+}

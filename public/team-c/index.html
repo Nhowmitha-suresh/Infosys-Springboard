@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSphere | Unified Project Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08111f;--panel:#0c1628;--border:#1d2a40;--text:#dce4f0;--muted:#8997ad;--blue:#2563eb;--violet:#7c3aed;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;overflow:hidden}
+.app-shell{display:flex;height:100vh}
+
+/* ---- Sidebar ---- */
+.sidebar{width:270px;flex:0 0 270px;background:var(--panel);border-right:1px solid var(--border);padding:20px 14px;overflow-y:auto;height:100vh}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:#1d2a40;border-radius:6px}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 22px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.brand-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--violet));display:grid;place-items:center;color:#fff;font-size:21px;flex:none}
+.brand h2{font-size:17px;margin:0;color:#fff;font-weight:800}
+.brand small{color:var(--muted);font-size:10px}
+.group-title{font-size:10px;letter-spacing:1.2px;color:#586780;font-weight:800;margin:16px 10px 8px;display:flex;justify-content:space-between}
+.group-title span.badge-ms{background:rgba(37,99,235,.18);color:#93b4fb;border-radius:5px;padding:1px 6px;font-size:9px}
+.nav-link{display:flex;align-items:center;gap:11px;color:var(--muted);text-decoration:none;padding:9px 12px;border-radius:7px;font-size:12.5px;font-weight:600;transition:.15s;cursor:pointer;margin-bottom:2px}
+.nav-link i{font-size:14px;width:16px;text-align:center}
+.nav-link:hover{color:#fff;background:rgba(148,163,184,.08)}
+.nav-link.active{color:#fff;background:#2563eb;border-radius:10px;font-weight:700}
+.nav-link.active:hover{background:#2563eb}
+.nav-group{margin:2px 0}
+.sidebar-footer{margin-top:18px;padding:12px;border-top:1px solid var(--border);color:#53627a;font-size:9.5px;display:flex;gap:7px;align-items:center}
+
+/* ---- Main ---- */
+.main{flex:1;display:flex;flex-direction:column;height:100vh;min-width:0}
+.topbar{height:58px;flex:none;border-bottom:1px solid #1d4ed8;background:linear-gradient(90deg,#1e3a8a,#1d4ed8);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.breadcrumb{font-size:13px;color:#c7d7fb}
+.breadcrumb strong{color:#fff}
+.breadcrumb span{opacity:.5;margin:0 6px}
+.user{display:flex;align-items:center;gap:10px;font-size:12.5px;color:#dbe6fd}
+.avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-weight:700;font-size:12px}
+.frame-wrap{flex:1;min-height:0;position:relative;background:var(--bg)}
+#contentFrame{width:100%;height:100%;border:0;display:block;background:var(--bg)}
+
+/* ---- Overview (landing) ---- */
+.overview{height:100%;overflow-y:auto;padding:34px 40px}
+.overview h1{font-size:26px;margin:0 0 6px;color:#fff;font-weight:800}
+.overview p.lead{color:var(--muted);margin:0 0 26px;font-size:13.5px}
+.ms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.ms-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:.15s}
+.ms-card:hover{border-color:#2563eb;transform:translateY(-2px)}
+.ms-icon{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:20px;color:#fff;margin-bottom:14px}
+.ms-icon.blue{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+.ms-icon.purple{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
+.ms-icon.orange{background:linear-gradient(135deg,#f97316,#c2410c)}
+.ms-icon.green{background:linear-gradient(135deg,#16a34a,#15803d)}
+.ms-card h3{font-size:15px;color:#fff;margin:0 0 6px;font-weight:700}
+.ms-card p{font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.5}
+.ms-card .modules{font-size:10.5px;color:#6b7c99}
+.ms-card .open{font-size:11.5px;color:#93b4fb;font-weight:700;margin-top:10px;display:flex;align-items:center;gap:5px}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="brand" style="cursor:pointer" onclick="goHome()">
+      <div class="brand-icon"><i class="bi bi-shield-fill-check"></i></div>
+      <div><h2>MediSphere</h2></div>
+    </div>
+
+    <div class="nav-group">
+      <a class="nav-link overview active" data-src="modules/m1/index.html" data-title="Dashboard" onclick="openModule(this)"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a>
+      <a class="nav-link" data-src="modules/m1/fhir-validation.html" data-title="FHIR Validation" onclick="openModule(this)"><i class="bi bi-code-slash"></i>FHIR Validation</a>
+      <a class="nav-link" data-src="modules/m1/patient-consent.html" data-title="Patient Consent" onclick="openModule(this)"><i class="bi bi-person-check-fill"></i>Patient Consent</a>
+      <a class="nav-link" data-src="modules/m1/audit-logs.html" data-title="HIPAA Audit Logs" onclick="openModule(this)"><i class="bi bi-shield-check"></i>HIPAA Audit Logs</a>
+      <a class="nav-link" data-src="modules/m2/model-accuracy.html" data-title="Model Accuracy" onclick="openModule(this)"><i class="bi bi-bullseye"></i>Model Accuracy</a>
+      <a class="nav-link" data-src="modules/m2/federated-convergence.html" data-title="Federated Convergence" onclick="openModule(this)"><i class="bi bi-diagram-3-fill"></i>Federated Convergence</a>
+      <a class="nav-link" data-src="modules/m2/shap-validity.html" data-title="SHAP Validity" onclick="openModule(this)"><i class="bi bi-search"></i>SHAP Validity</a>
+      <a class="nav-link" data-src="modules/m3/vitals-range-validation.html" data-title="Vitals Range Validation" onclick="openModule(this)"><i class="bi bi-heart-pulse-fill"></i>Vitals Range Validation</a>
+      <a class="nav-link" data-src="modules/m3/alert-fatigue-prevention.html" data-title="Alert Fatigue Prevention" onclick="openModule(this)"><i class="bi bi-bell-slash-fill"></i>Alert Fatigue Prevention</a>
+      <a class="nav-link" data-src="modules/m3/anomaly-detection-precision.html" data-title="Anomaly Detection Precision" onclick="openModule(this)"><i class="bi bi-radar"></i>Anomaly Detection Precision</a>
+      <a class="nav-link" data-src="modules/m4/clinical-guideline-compliance.html" data-title="Clinical Guideline Compliance" onclick="openModule(this)"><i class="bi bi-journal-check"></i>Clinical Guideline Compliance</a>
+      <a class="nav-link" data-src="modules/m4/careplan-safety-checks.html" data-title="Careplan Safety Checks" onclick="openModule(this)"><i class="bi bi-clipboard2-pulse-fill"></i>Careplan Safety Checks</a>
+      <a class="nav-link" data-src="modules/m4/drug-interaction-validation.html" data-title="Drug Interaction Validation" onclick="openModule(this)"><i class="bi bi-capsule"></i>Drug Interaction Validation</a>
+    </div>
+
+    <div class="group-title">TEAM D <span class="badge-ms">12 COMPONENTS</span></div>
+    <div class="nav-group">
+      <a class="nav-link" data-src="modules/d/m1/twin-data-completeness.html" data-title="Twin Data Completeness" onclick="openModule(this)"><i class="bi bi-clipboard2-check"></i>Twin Data Completeness</a>
+      <a class="nav-link" data-src="modules/d/m1/vitals-range-validation.html" data-title="Vitals Range Validation (Team D)" onclick="openModule(this)"><i class="bi bi-heart-pulse"></i>Vitals Range Validation (D)</a>
+      <a class="nav-link" data-src="modules/d/m1/rbac.html" data-title="Role-Based Access Control (RBAC)" onclick="openModule(this)"><i class="bi bi-person-lock"></i>Role-Based Access Control</a>
+      <a class="nav-link" data-src="modules/d/m2/prediction-calibration.html" data-title="Prediction Calibration" onclick="openModule(this)"><i class="bi bi-speedometer2"></i>Prediction Calibration</a>
+      <a class="nav-link" data-src="modules/d/m2/bias-audit.html" data-title="Bias Audit Across Demographics" onclick="openModule(this)"><i class="bi bi-people"></i>Bias Audit Across Demographics</a>
+      <a class="nav-link" data-src="modules/d/m2/clinical-guidelines-compliance.html" data-title="Clinical Guidelines Compliance (Team D)" onclick="openModule(this)"><i class="bi bi-journal-medical"></i>Clinical Guidelines Compliance (D)</a>
+      <a class="nav-link" data-src="modules/d/m3/alert-routing.html" data-title="Alert Routing Rules" onclick="openModule(this)"><i class="bi bi-sign-turn-right"></i>Alert Routing Rules</a>
+      <a class="nav-link" data-src="modules/d/m3/acknowledgment-tracking.html" data-title="Acknowledgment Tracking" onclick="openModule(this)"><i class="bi bi-check2-square"></i>Acknowledgment Tracking</a>
+      <a class="nav-link" data-src="modules/d/m3/false-alert-rate.html" data-title="False Alert Rate (FAR) < 3%" onclick="openModule(this)"><i class="bi bi-bell"></i>False Alert Rate (FAR) < 3%</a>
+      <a class="nav-link" data-src="modules/d/m4/adherence-calculation-accuracy.html" data-title="Adherence Calculation Accuracy" onclick="openModule(this)"><i class="bi bi-graph-up"></i>Adherence Calculation Accuracy</a>
+      <a class="nav-link" data-src="modules/d/m4/outcome-tracking-integrity.html" data-title="Outcome Tracking Integrity" onclick="openModule(this)"><i class="bi bi-shield-check"></i>Outcome Tracking Integrity</a>
+      <a class="nav-link" data-src="modules/d/m4/provider-approval-workflow.html" data-title="Provider Approval Workflow" onclick="openModule(this)"><i class="bi bi-person-check"></i>Provider Approval Workflow</a>
+    </div>
+
+    <div class="nav-group" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+      <a class="nav-link" data-src="modules/m1/settings.html" data-title="Settings" onclick="openModule(this)"><i class="bi bi-gear-fill"></i>Settings</a>
+      <a class="nav-link" data-src="modules/m1/profile.html" data-title="Profile" onclick="openModule(this)"><i class="bi bi-person-circle"></i>Profile</a>
+      <a class="nav-link" data-src="modules/m1/index.html" data-title="Logout" onclick="openModule(this)"><i class="bi bi-box-arrow-right"></i>Logout</a>
+    </div>
+
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="breadcrumb">MediSphere <span>/</span> <strong id="crumbTitle">Dashboard</strong></div>
+      <div class="user"><span>Clinician</span><div class="avatar">C</div></div>
+    </header>
+
+    <div class="frame-wrap">
+      <iframe id="contentFrame" src="modules/m1/index.html"></iframe>
+    </div>
+  </main>
+</div>
+
+<script>
+function goHome(){
+  document.getElementById('contentFrame').src='modules/m1/index.html';
+  document.getElementById('crumbTitle').textContent='Dashboard';
+  setActive(null);
+}
+function toggleGroup(el){
+  var group = el.closest('.nav-group');
+  group.classList.toggle('open');
+}
+function setActive(el){
+  document.querySelectorAll('.nav-link').forEach(function(x){x.classList.remove('active')});
+  if(el) el.classList.add('active');
+}
+function openModule(el){
+  var src=el.getAttribute('data-src');
+  var title=el.getAttribute('data-title');
+  document.getElementById('contentFrame').src=src;
+  document.getElementById('crumbTitle').textContent=title;
+  setActive(el);
+}
+function jumpTo(src,title){
+  var link=document.querySelector('.nav-link[data-src="'+src+'"]');
+  if(link){ openModule(link); return; }
+  document.getElementById('contentFrame').src=src;
+  document.getElementById('crumbTitle').textContent=title;
+  setActive(null);
+}
+</script>
+</body>
+</html>

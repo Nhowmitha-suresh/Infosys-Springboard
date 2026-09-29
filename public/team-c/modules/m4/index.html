@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSphere | Medication & Care Safety</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon"><i class="bi bi-shield-fill-check"></i></div><div><h2>MediSphere</h2><small>Care & Medication Safety</small></div></div>
+  <div class="nav-title">MAIN MENU</div>
+  <nav>
+    <a class="nav-link active" href="index.html"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a>
+<a class="nav-link" href="clinical-guideline-compliance.html"><i class="bi bi-journal-check"></i>Clinical Guideline Compliance</a>
+<a class="nav-link" href="careplan-safety-checks.html"><i class="bi bi-clipboard2-pulse-fill"></i>Careplan Safety Checks</a>
+<a class="nav-link" href="drug-interaction-validation.html"><i class="bi bi-capsule"></i>Drug Interaction Validation</a>
+  </nav>
+  <div class="sidebar-footer"><i class="bi bi-shield-lock-fill"></i><span>Secure AI Analytics</span></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="breadcrumb">MediSphere <span>/</span> <strong>Care & Medication Safety</strong></div><div class="user"><span>Clinician</span><div class="avatar">C</div></div></header>
+<section class="content">
+  <div class="hero">
+    <div><span class="eyebrow">MILESTONE 4</span><h1>Care & Medication Safety</h1><p>Careplan safety checks, drug interaction validation and clinical guideline compliance, in one view.</p></div>
+    <button class="btn btn-primary-soft" onclick="refreshDashboard()"><i class="bi bi-arrow-clockwise"></i> Refresh Dashboard</button>
+  </div>
+
+  <div id="dashNotice" class="static-notice"><i class="bi bi-cloud-check"></i><span>Loading live data...</span></div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Guideline Compliance</div><div class="stat-value success" id="dashCompliance">--</div><div class="stat-sub">Across active careplans</div></div>
+    <div class="stat"><div class="stat-label">Careplans Flagged</div><div class="stat-value" id="dashPlanFlagged">--</div><div class="stat-sub">Safety rule violations</div></div>
+    <div class="stat"><div class="stat-label">Drug Interactions Found</div><div class="stat-value" id="dashDrugFlagged">--</div><div class="stat-sub">Across active medications</div></div>
+    <div class="stat"><div class="stat-label">Modules Ready</div><div class="stat-value">3 / 3</div><div class="stat-sub">Frontend complete</div></div>
+  </div>
+
+  <div class="section-grid">
+    <a class="module-card" href="clinical-guideline-compliance.html"><div class="module-icon orange"><i class="bi bi-journal-check"></i></div><div><h3>Clinical Guideline Compliance</h3><p>Check treatment plans against clinical guideline protocols.</p></div><i class="bi bi-arrow-right module-arrow"></i></a>
+    <a class="module-card" href="careplan-safety-checks.html"><div class="module-icon blue"><i class="bi bi-clipboard2-pulse-fill"></i></div><div><h3>Careplan Safety Checks</h3><p>Validate each care plan item against safety rules before it's applied.</p></div><i class="bi bi-arrow-right module-arrow"></i></a>
+    <a class="module-card" href="drug-interaction-validation.html"><div class="module-icon purple"><i class="bi bi-capsule"></i></div><div><h3>Drug Interaction Validation</h3><p>Check a patient's active medications for unsafe combinations.</p></div><i class="bi bi-arrow-right module-arrow"></i></a>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><h2>Frontend Status</h2><p>UI is complete for all three checks. Each page tries its backend first and falls back to demo data if it isn't reachable yet.</p></div><span class="status">UI Ready</span></div>
+    <div class="integration-list">
+      <div><i class="bi bi-check-circle-fill"></i><span>Clinical Guideline Compliance UI</span><small>Awaiting API</small></div>
+      <div><i class="bi bi-check-circle-fill"></i><span>Careplan Safety Checks UI</span><small>Awaiting API</small></div>
+      <div><i class="bi bi-check-circle-fill"></i><span>Drug Interaction Validation UI</span><small>Awaiting API</small></div>
+    </div>
+  </div>
+</section>
+<footer class="footer">MediSphere Healthcare Management Platform • Secure • Reliable • Healthcare</footer>
+</main>
+</div>
+<script src="script.js"></script>
+<script>
+document.querySelectorAll('.nav-link').forEach(function(link){
+  if(link.getAttribute('href') === location.pathname.split('/').pop()){
+    document.querySelectorAll('.nav-link').forEach(function(x){x.classList.remove('active');});
+    link.classList.add('active');
+  }
+});
+document.addEventListener("DOMContentLoaded", refreshDashboard);
+</script>
+<script src="../_iframe-fix.js"></script>
+</body>
+</html>
