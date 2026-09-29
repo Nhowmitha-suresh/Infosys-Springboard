@@ -24,14 +24,15 @@ public class Report {
     @Column(name = "patient_name")
     private String patientName;
 
-    /** Summary | Vitals | Predictions | CarePlan */
+    /**
+     * Summary | Vitals | Predictions | CarePlan
+     */
     @Column(nullable = false)
     private String type;
 
     private String title;
 
-    @Lob
-    @Column(length = 8000)
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "generated_by")
